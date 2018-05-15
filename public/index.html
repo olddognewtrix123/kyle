@@ -41,7 +41,8 @@
                     bgColor: "green",
                     nextmodule: 0,
                     inputs: ['input-0'],
-                    inputsindex: 0
+                    inputsindex: 0,
+                    temparray:[] // because you have to wait for the user to click off of the current role field before updating inputs array
                 });
             },
 
@@ -75,48 +76,30 @@
             {
                this.setState({ nextDisabled: true });
                this.setState({ bgColor: "grey" });
-               this.setState({ requirement: evt.target.value });
+             //  this.setState({ requirement: evt.target.value });
+               
             }
             else
             {
                this.setState({ nextDisabled: false });
                this.setState({ bgColor: "green" });
-               this.setState({ requirement: evt.target.value });
+             //  this.setState({ requirement: evt.target.value });
             }
         },
         
-        // this has to make sure that EACH ELEMENT is not empty
-        handleRoleChange: function(evt) 
-        {
-            var arrcurrentroles = this.state.rolesarr;
-            var currentrolecount = this.state.rolecount;
-            var test = evt.currentTarget.value; 
-            var opentArray = this.state.inputs;
-            console.log(evt.currentTarget);
-            console.log("the id is " + evt.currentTarget.id)
-    //        var i = evt.target.id;
-    //        opentArray[i] = test;
-    //       this.setState({inputs: opentArray});
-    //        console.log("inputs is " + this.state.inputs);
-                if (test =="")
-                {
-                   this.setState({ nextDisabled: true });
-                    this.setState({ bgColor: "grey" });
-                   this.setState({ currentrole: evt.target.value });
-                }
-                else
-                {
-                   this.setState({ nextDisabled: false });
-                    this.setState({ bgColor: "green" });
-                   this.setState({ currentrole: evt.target.value });
-                }
-        },
+        
         
         appendInput: function() {
+            
+            this.setState({
+                            inputs: this.state.temparray // all heck might break loose here but I gotta do it this way for now otherwise it rerenders the entire page
+                        });
+                        
                 var newInput = `input-${this.state.inputs.length}`;
                 this.setState({ inputs: this.state.inputs.concat([newInput]) });
                 var currentIndex = this.state.inputsindex;
                 this.setState({ inputsindex: currentIndex + 1 });
+                console.log("appendInput was tiggered " + this.state.inputs);
             },
         
         // called by nextModule()...
@@ -133,6 +116,38 @@
             }
         },
         
+        // this has to make sure that EACH ELEMENT is not empty
+        handleRoleChange: function(index, newValue) 
+        {
+
+            var test = newValue; 
+            
+                if (test =="")
+                {
+                   this.setState({ nextDisabled: true });
+                    this.setState({ bgColor: "grey" });
+                   this.updateInputsArray(index, newValue);
+                }
+                else
+                {
+                   this.setState({ nextDisabled: false });
+                    this.setState({ bgColor: "green" });
+                   this.updateInputsArray(index, newValue);
+                  console.log("the index is " + index);
+                }
+        },
+        
+        
+                    updateInputsArray: function(index, newValue) {
+                       console.log("the index is " + index);
+                       console.log("the value at that index is " + newValue);
+                        const updatedArray = [...this.state.inputs];
+                       updatedArray[index] = newValue;
+                       this.setState({
+                            temparray: updatedArray // convolluuuuttteeeddd
+                        });
+                        console.log(updatedArray);
+                    },
         
         // END of Custom Functions***
         
@@ -143,7 +158,7 @@
                 <div>
                     
                     {!this.state.theReqIsHidden && <Req onChange={this.handleReqChange}/>}
-                    {!this.state.testRolesIsHidden && <Roles onChange={this.handleRoleChange} onClick={this.appendInput} inputs ={this.state.inputs} inputsindex={uniqueRoleId}/>}
+                    {!this.state.testRolesIsHidden && <Roles onBlur={this.handleRoleChange} getnewid={this.getnewid} onClick={this.appendInput} inputs ={this.state.inputs} inputsindex={uniqueRoleId}/>}
                     
                     
                     <button onClick={this.nextModule} disabled={this.state.nextDisabled} style={{backgroundColor:this.state.bgColor}}>{this.state.nextButton}</button>

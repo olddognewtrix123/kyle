@@ -9,15 +9,14 @@
 var Roles = React.createClass({
 
 
-    
-
 
     render: function() {
         return(
             <div>
                <form>
                    <div id="dynamicInput">
-                       {this.props.inputs.map(input => <input type = "text" key={input}  id={this.props.inputsindex} placeholder='Enter something here' onChange={this.props.onChange}/>)}
+                      
+                       {this.props.inputs.map((input, index) => <input type = "text" key={input}  placeholder='Enter something here' onChange={e => this.props.onBlur(index, e.target.value)}/>)}
                    </div>
                </form>
                <button onClick={() =>this.props.onClick()}>
@@ -29,3 +28,4 @@ var Roles = React.createClass({
 
 })
 
+//  {this.props.inputs.map(input => <input type = "text" key={input}  placeholder='Enter something here' onChange={this.props.onChange}/>)}
