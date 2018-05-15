@@ -1,0 +1,230 @@
+body{
+    font-family: Raleway;
+    margin: 10px 30px;
+    color: black;
+}
+#homepage{
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+}
+#questions-container{
+    width: 750px;
+    height: 500px;
+    margin: 40px auto;
+    padding: 10px 20px;
+    background-color: white;
+    color: blue;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+#talker-container{
+    width: 750px;
+    height: 50px;
+    margin: 40px auto;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border-radius: 4px;
+}
+.basket {
+    transition: opacity 2s;
+    opacity: 1;
+}
+.basket.hide {
+  opacity: 0;
+}
+#QandA-container{
+    width: 750px;
+    height: 200px;
+    margin: 40px auto;
+    padding: 10px 20px;
+    background-color: CornflowerBlue;
+    color: darkblue;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+}
+input[type="text"]{
+    display: block;
+    width: 300px;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+::short { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    width: 50px;
+}
+
+input[type="textshort"]{
+    display: block;
+    width: 50px;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+label{
+    font-weight: bold;
+}
+.title{
+    color: #fff;
+    text-align: center;
+    font-size: 48px;
+}
+#homepage h1{
+    text-align: center;
+}
+form{
+    max-width: 350px;
+    margin: 30px auto;
+}
+input[type="submit"]{
+    background: #555;
+     color: #fff;
+     border: 0;
+     padding: 10px;
+     font-size: 18px;
+     width: 200px;
+     margin: 0 auto;
+     display: block;
+     cursor: pointer;
+     border-radius: 4px;
+ }
+ul{
+    margin: 0;
+    padding: 0;
+}
+li{
+    padding: 15px 0;
+    background: #eee;
+    list-style-type: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+span{
+    display: inline-block;
+    margin: 0 20px;
+    font-size: x-small;
+}
+span.dist{
+    color: green;
+    float: right;
+}
+span.true{
+    border-radius: 10px;
+    width: 10px;
+    height: 10px;
+    background: green;
+}
+span.false{
+    border-radius: 10px;
+    width: 10px;
+    height: 10px;
+    background: #ff5252;
+}
+button{
+    float: right;
+    background: green;
+    width: 200px;
+    border: 0;
+    padding: 5px 10px;
+    color: #fff;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button.false{display: none;}
+
+
+#pookie00{
+    background-color: blue;
+    text-align: center;
+    color: white;
+    width: 720px;
+    height: 350px;
+    margin: 40px auto;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 20;
+    left: 50;
+    transition: opacity 2s;
+    opacity: .9;
+}
+
+#pookie01{
+    background-color: lightgrey;
+    width: 720px;
+    height: 300px;
+    margin: 40px auto;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 16px;
+    right: 35px;
+  }
+}
+
+.overlay h2, .overlay p {
+  color:white;
+  }

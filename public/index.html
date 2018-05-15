@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+    
+	<head>
+        
+        <meta charset="utf-8">
+		<title>This is Kyle</title>
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+     <!--   <link rel="shortcut icon" href="">  this is to get rid of the favicon error-->
+        <link href="/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+
+		<h1 class="title">Kyle</h1>
+		<div id="homepage">
+            <h1>basic React project</h1>
+            <div id="kyle"></div>
+        </div>
+        
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="https://unpkg.com/react@15/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+        <script type="text/babel" src="customfunctions.js"></script>
+        <script type="text/babel" src="thereq.js"></script>
+        <script type="text/babel" src="theroles.js"></script>
+        
+        <!-- Create React Component -->
+        <script type="text/babel">
+        
+        var Application = React.createClass({
+            
+            getInitialState: function(){
+                return({
+                    nextButton: "Begin",
+                    nextDisabled: false,
+                    theReqIsHidden: true,
+                    requirement: "",
+                    testRolesIsHidden: true,
+                    currentrole: "",
+                    bgColor: "green",
+                    nextmodule: 0,
+                    inputs: ['input-0'],
+                    inputsindex: 0
+                });
+            },
+
+        // CUSTOM FUNCTIONS *****
+        // when Next button is clicked...
+        nextModule: function() {
+            
+            this.setState({ nextDisabled: true });
+            this.setState({ bgColor: "grey" });
+            var current = this.state.nextmodule;
+                   this.toggleHidden(current);
+                   var nextmodule = current +1;
+                   this.setState({
+                            nextmodule: nextmodule
+                      });
+
+            var statement = this.state.nextButton;
+            if(statement == "Begin")// this is for the very first time you click the button
+            {
+                this.setState({
+                     nextButton: "Next"
+                });
+            }
+        },
+        
+        // data for req field
+        handleReqChange: function(evt) 
+        {
+            var test = evt.target.value;
+            if (test =="")
+            {
+               this.setState({ nextDisabled: true });
+               this.setState({ bgColor: "grey" });
+               this.setState({ requirement: evt.target.value });
+            }
+            else
+            {
+               this.setState({ nextDisabled: false });
+               this.setState({ bgColor: "green" });
+               this.setState({ requirement: evt.target.value });
+            }
+        },
+        
+        // this has to make sure that EACH ELEMENT is not empty
+        handleRoleChange: function(evt) 
+        {
+            var arrcurrentroles = this.state.rolesarr;
+            var currentrolecount = this.state.rolecount;
+            var test = evt.currentTarget.value; 
+            var opentArray = this.state.inputs;
+            console.log(evt.currentTarget);
+            console.log("the id is " + evt.currentTarget.id)
+    //        var i = evt.target.id;
+    //        opentArray[i] = test;
+    //       this.setState({inputs: opentArray});
+    //        console.log("inputs is " + this.state.inputs);
+                if (test =="")
+                {
+                   this.setState({ nextDisabled: true });
+                    this.setState({ bgColor: "grey" });
+                   this.setState({ currentrole: evt.target.value });
+                }
+                else
+                {
+                   this.setState({ nextDisabled: false });
+                    this.setState({ bgColor: "green" });
+                   this.setState({ currentrole: evt.target.value });
+                }
+        },
+        
+        appendInput: function() {
+                var newInput = `input-${this.state.inputs.length}`;
+                this.setState({ inputs: this.state.inputs.concat([newInput]) });
+                var currentIndex = this.state.inputsindex;
+                this.setState({ inputsindex: currentIndex + 1 });
+            },
+        
+        // called by nextModule()...
+        toggleHidden: function(x) {
+            if(x == 0){
+                this.setState({
+                     theReqIsHidden: !this.state.theReqIsHidden
+                });
+            }
+            else {
+                this.setState({
+                     testRolesIsHidden: !this.state.testRolesIsHidden
+                });
+            }
+        },
+        
+        
+        // END of Custom Functions***
+        
+        
+		render: function(){
+		    let uniqueRoleId = this.state.inputsindex;
+            return(
+                <div>
+                    
+                    {!this.state.theReqIsHidden && <Req onChange={this.handleReqChange}/>}
+                    {!this.state.testRolesIsHidden && <Roles onChange={this.handleRoleChange} onClick={this.appendInput} inputs ={this.state.inputs} inputsindex={uniqueRoleId}/>}
+                    
+                    
+                    <button onClick={this.nextModule} disabled={this.state.nextDisabled} style={{backgroundColor:this.state.bgColor}}>{this.state.nextButton}</button>
+
+                </div>
+            )
+        }
+		
+        });  // end of Application.
+        
+        
+        
+		ReactDOM.render(<Application />, document.getElementById('kyle'));
+        </script>
+
+
+    </body>
+</html>
+
